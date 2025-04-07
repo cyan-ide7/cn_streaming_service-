@@ -1,2 +1,2 @@
 # cn_streaming_service-
-ggs
+streaming servies through sockets 
