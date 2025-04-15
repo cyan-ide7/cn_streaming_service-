@@ -19,11 +19,8 @@ def start_client(server_ip='localhost', port=9999, buffer_size=65536):
             if not chunk:
                 break
 
-            # Append chunk to the buffer
-            data_buffer += chunk
-
             # Check for end-of-frame marker
-            if len(chunk) < buffer_size:  # Assuming the last chunk of a frame is smaller
+            if chunk == b'END':  # Detect end-of-frame marker
                 # Convert bytes to numpy array
                 frame = np.frombuffer(data_buffer, dtype=np.uint8)
                 frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
@@ -36,6 +33,9 @@ def start_client(server_ip='localhost', port=9999, buffer_size=65536):
 
                 # Clear the buffer for the next frame
                 data_buffer = b''
+            else:
+                # Append chunk to the buffer
+                data_buffer += chunk
         except Exception as e:
             print(f"Error: {e}")
             break
