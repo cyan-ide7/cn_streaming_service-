@@ -2,7 +2,7 @@ import cv2
 import socket
 import numpy as np
 
-def start_client(server_ip='192.168.187.234', port=8888, buffer_size=65000):
+def start_client(server_ip='host', port=8888, buffer_size=65000):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     # Send a handshake message to the server
@@ -49,4 +49,4 @@ def start_client(server_ip='192.168.187.234', port=8888, buffer_size=65000):
     client_socket.close()
     cv2.destroyAllWindows()
 
-start_client('192.168.187.234', 8888)
+start_client('host', 8888)
